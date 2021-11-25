@@ -14,12 +14,13 @@ const postsSlice = createSlice({
         state.push(action.payload)
       },
       // use a prepare callback function when the action.payload is complicated to prepare, so that the dispatch action object can become rather simple
-      prepare(title, content) {
+      prepare(title, content, userId) {
         return {
           payload: {
             id: nanoid(),
             title,
             content,
+            user: userId,
           },
         }
       },
