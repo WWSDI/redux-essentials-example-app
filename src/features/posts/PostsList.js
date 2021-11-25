@@ -1,10 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-export const PostsList = () => {
-  const posts = useSelector(state => state.posts)
+// - Our posts list read the initial set of posts from the store with useSelector and rendered the initial UI
+// - We dispatched the postAdded action containing the data for the new post entry
+// - The posts reducer saw the postAdded action, and updated the posts array with the new entry
+// - The Redux store told the UI that some data had changed
+// - The posts list read the updated posts array, and re-rendered itself to show the new post
 
-  const renderedPosts = posts.map(post => (
+export const PostsList = () => {
+  const posts = useSelector((state) => state.posts)
+
+  const renderedPosts = posts.map((post) => (
     // content of the List component
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>

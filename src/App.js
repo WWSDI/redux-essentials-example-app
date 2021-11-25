@@ -20,8 +20,8 @@ function App() {
             path="/"
             render={() => (
               <>
-                <PostsList />
                 <AddPostForm />
+                <PostsList />
               </>
             )}
           />
