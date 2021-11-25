@@ -10,5 +10,4 @@ const postsSlice = createSlice({
   initialState,
   reducers: {},
 })
-
-export const {reducer: postsReducer} = postsSlice.reducer
+export const {reducer: postsReducer} = postsSlice;
