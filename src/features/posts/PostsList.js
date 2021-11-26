@@ -10,8 +10,11 @@ import { Link } from 'react-router-dom'
 
 export const PostsList = () => {
   const posts = useSelector((state) => state.posts)
+  const orderedPosts = posts
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date))
 
-  const renderedPosts = posts.map((post) => (
+  const renderedPosts = orderedPosts.map((post) => (
     // content of the List component
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
