@@ -42,6 +42,7 @@ export const AddPostForm = () => {
           name="postTitle"
           value={title}
           onChange={onTitleChanged}
+          placeholder="What's on your mind?"
         />
         <label htmlFor="postAuthor">Author:</label>
         <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
