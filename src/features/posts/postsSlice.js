@@ -86,6 +86,20 @@ const postsSlice = createSlice({
       }
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (rootState, action) => {
+        rootState.status = 'loading'
+      })
+      .addCase(fetchPosts.fulfilled, (rootState, action) => {
+        rootState.status = 'succeeded'
+        rootState.posts = rootState.posts.concat(action.payload)
+      })
+      .addCase(fetchPosts.rejected, (rootState, action) => {
+        rootState.status = 'failed'
+        rootState.error = action.error.message
+      })
+  },
 })
 export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
 export const { reducer: postsReducer } = postsSlice
