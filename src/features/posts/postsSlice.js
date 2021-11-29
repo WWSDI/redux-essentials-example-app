@@ -1,4 +1,5 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit'
+import { client } from '../../api/client'
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit'
 import { sub } from 'date-fns'
 
 const initialState = {
@@ -32,9 +33,14 @@ const initialState = {
       },
     },
   ],
-  status: false,
+  status: 'idle',
   error: null,
 }
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await client.get('/fakeApi/posts')
+  return response.data
+})
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -87,4 +93,4 @@ export const { reducer: postsReducer } = postsSlice
 // Note the 'state' here really is the root state, because these two cb fn are to be used in useSelector()
 export const selectAllPosts = (rootState) => rootState.posts.posts
 export const selectPostById = (rootState, postId) =>
-rootState.posts.posts.find((post) => post.id === postId)
+  rootState.posts.posts.find((post) => post.id === postId)

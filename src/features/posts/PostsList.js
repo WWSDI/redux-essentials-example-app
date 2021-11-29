@@ -1,8 +1,8 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { PostAuthor } from './PostAuthor'
-import { selectAllPosts } from './postsSlice'
+import { fetchPosts, selectAllPosts } from './postsSlice'
 import { ReactionButtons } from './ReactionButtons'
 import { TimeAgo } from './TimeAgo'
 
@@ -13,7 +13,16 @@ import { TimeAgo } from './TimeAgo'
 // - The posts list read the updated posts array, and re-rendered itself to show the new post
 
 export const PostsList = () => {
+  const dispatch = useDispatch()
   const posts = useSelector(selectAllPosts)
+  const postStatus = useSelector((state) => state.posts.status)
+
+  useEffect(() => {
+    if (postStatus === 'idle') {
+      dispatch(fetchPosts())
+    }
+  }, [dispatch, postStatus])
+
   const orderedPosts = posts
     .slice()
     .sort((a, b) => b.date.localeCompare(a.date))
