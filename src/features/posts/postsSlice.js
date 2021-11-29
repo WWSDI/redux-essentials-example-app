@@ -85,6 +85,6 @@ export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
 export const { reducer: postsReducer } = postsSlice
 
 // Note the 'state' here really is the root state, because these two cb fn are to be used in useSelector()
-export const selectAllPosts = (state) => state.posts.posts
-export const selectPostById = (state, postId) =>
-  state.posts.posts.find((post) => post.id === postId)
+export const selectAllPosts = (rootState) => rootState.posts.posts
+export const selectPostById = (rootState, postId) =>
+rootState.posts.posts.find((post) => post.id === postId)
