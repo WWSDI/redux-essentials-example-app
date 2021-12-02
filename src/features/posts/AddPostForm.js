@@ -19,18 +19,18 @@ export const AddPostForm = () => {
     [title, content, userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onSavePostClicked = async () => {
-    if (canSave) {
-      try {
-        setAddRequestStatus('pending')
-        await dispatch(addNewPost({ title, content, user: userId })).unwrap()
-        setTitle('')
-        setContent('')
-        setUserId('')
-      } catch (err) {
-        console.error('Failed to save the post: ', err)
-      } finally {
-        setAddRequestStatus('idle')
-      }
+    if (!canSave) return
+
+    try {
+      setAddRequestStatus('pending')
+      await dispatch(addNewPost({ title, content, user: userId })).unwrap()
+      setTitle('')
+      setContent('')
+      setUserId('')
+    } catch (err) {
+      console.error('Failed to save the post: ', err)
+    } finally {
+      setAddRequestStatus('idle')
     }
   }
 

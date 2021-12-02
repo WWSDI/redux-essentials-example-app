@@ -53,7 +53,7 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    postAdded: {
+    /* postAdded: {
       reducer(state, action) {
         state.posts.push(action.payload)
       },
@@ -76,7 +76,7 @@ const postsSlice = createSlice({
           },
         }
       },
-    },
+    }, */
     postUpdated(state, action) {
       const { id, title, content } = action.payload
       const existingPost = state.posts.find((post) => post.id === id)
